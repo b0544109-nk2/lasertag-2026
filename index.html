@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>#ウィンターレーザータグ会2026</title>
+<meta name="description" content="2026/12/13(日) 15:00〜 ブレイブポイント台場店。4チーム総当たりのレーザータグ会。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1020; --panel:#141b33; --panel2:#1b2443; --line:#2b3763;
+    --ink:#eef3ff; --dim:#9aa6cf;
+    --cyan:#35e0ff; --pink:#ff4fa3; --lime:#b6ff3c; --amber:#ffc23c;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    color:var(--ink);min-height:100vh;background:var(--bg);
+    font-family:"Kosugi Maru","Hiragino Maru Gothic ProN","Yu Gothic UI",system-ui,sans-serif;
+    background-image:
+      linear-gradient(115deg,transparent 0 46%,rgba(53,224,255,.10) 46% 46.4%,transparent 46.4%),
+      linear-gradient(65deg,transparent 0 62%,rgba(255,79,163,.10) 62% 62.4%,transparent 62.4%),
+      radial-gradient(900px 500px at 50% -10%,rgba(53,224,255,.16),transparent 70%);
+    background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;font-synthesis:none;overflow-x:clip;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:26px 16px 70px}
+  .pop,h1,.card>h2,.pts,.score,.tabs button,.big{font-family:"Mochiy Pop One","Kosugi Maru",sans-serif}
+
+  header{text-align:center;margin:10px 0 6px}
+  .kicker{display:inline-block;border:2px solid var(--cyan);color:var(--cyan);border-radius:999px;
+    padding:4px 14px;font-size:.8rem;font-weight:800;letter-spacing:.08em;box-shadow:0 0 14px rgba(53,224,255,.45)}
+  h1{margin:14px 0 6px;font-size:clamp(1.3rem,6vw,2.3rem);line-height:1.25;
+    text-shadow:0 0 18px rgba(255,79,163,.75),0 0 2px #fff}
+  h1 small{display:block;font-size:.5em;color:var(--lime);text-shadow:0 0 12px rgba(182,255,60,.6);margin-top:4px;letter-spacing:.2em}
+  .count{color:var(--dim);font-weight:800;font-size:.9rem}
+  .count b{color:var(--amber);font-size:1.3em}
+
+  .card{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:18px 16px 14px;margin:22px 0;
+    box-shadow:0 8px 0 rgba(0,0,0,.35)}
+  .card>h2{margin:0 0 14px;font-size:1.02rem;display:flex;align-items:center;gap:8px}
+  .card>h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
+  .note{color:var(--dim);font-size:.8rem;line-height:1.7;margin:8px 2px 0}
+
+  .info{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;margin:0;font-size:.95rem;line-height:1.6}
+  .info dt{color:var(--cyan);font-weight:800;white-space:nowrap}
+  .info dd{margin:0}
+  .info a,.note a{color:var(--amber)}
+  .big{font-size:1.15rem}
+  .items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+  .items li{background:var(--panel2);border-radius:12px;padding:10px 12px;font-size:.9rem;line-height:1.5}
+  .items b{display:block}
+  .items span{color:var(--dim);font-size:.8rem}
+
+  .tblwrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{padding:10px 8px;text-align:center;font-size:.92rem;white-space:nowrap;border-bottom:1px solid var(--line)}
+  thead th{color:var(--dim);font-size:.72rem;letter-spacing:.06em;font-weight:800}
+  tbody tr:last-child td,tbody tr:last-child th{border-bottom:none}
+  td.name,th.name{text-align:left;white-space:normal}
+  thead th.name{white-space:nowrap}
+  .pts{color:var(--amber);font-size:1.1rem}
+  .rank{width:2.6em;color:var(--dim);font-weight:800}
+  .medal{font-size:1.25rem}
+  .tag{display:inline-block;border-radius:999px;font-weight:800;font-size:.82rem;line-height:1;padding:6px 11px;white-space:nowrap}
+  .vs{color:var(--dim);font-size:.78rem;padding:0 6px;font-weight:800}
+  .score{font-size:1.1rem}
+  .win{color:var(--lime)}
+  .pending{color:var(--dim);font-size:.8rem;border:1px dashed var(--line);border-radius:8px;padding:2px 9px}
+  .members{color:var(--dim);font-size:.86rem;line-height:1.7}
+
+  .tt td{white-space:normal;text-align:left}
+  .tt td.t{white-space:nowrap;color:var(--cyan);font-weight:800;width:4.2em}
+  .tt tr.sec td{background:var(--panel2);font-weight:800}
+  .tt tr.now td{background:rgba(182,255,60,.14)}
+  .tt tr.now td.t::after{content:" ◀いま";color:var(--lime);font-size:.72rem}
+  .tt .memo{color:var(--dim);font-size:.8rem}
+
+  .maintabs{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:16px -6px 0;padding:8px 6px;
+    background:rgba(11,16,32,.92);backdrop-filter:blur(6px)}
+  .maintabs button{font-family:"Mochiy Pop One","Kosugi Maru",sans-serif;font-size:.74rem;line-height:1.3;color:var(--dim);background:var(--panel);
+    border:2px solid var(--line);border-radius:12px;padding:9px 2px;cursor:pointer}
+  .maintabs button[aria-current="page"]{color:#0b1020;background:var(--lime);border-color:var(--lime)}
+  section[data-tab][hidden]{display:none}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+  .tabs button{font-size:.85rem;color:var(--dim);background:var(--panel2);border:2px solid var(--line);
+    border-radius:999px;padding:7px 14px;cursor:pointer}
+  .tabs button[aria-pressed="true"]{color:#0b1020;background:var(--cyan);border-color:var(--cyan)}
+  .ruledesc{background:var(--panel2);border-left:4px solid var(--pink);border-radius:10px;padding:10px 12px;
+    font-size:.88rem;line-height:1.7;margin:0 0 14px}
+  .league td,.league th{border:1px solid var(--line);font-weight:800}
+  .league .diag{color:var(--line)}
+  .league .lw{background:rgba(182,255,60,.16);color:var(--lime)}
+  .league .ll{background:rgba(255,79,163,.14);color:var(--pink)}
+  .league .ld{color:var(--dim)}
+  .league .lpend{color:var(--line)}
+  .league .mark{display:block;font-size:1.25rem;line-height:1.1}
+  .league .sc{display:block;font-size:.72rem;opacity:.85;margin-top:2px}
+  h3{font-size:.85rem;color:var(--dim);margin:18px 0 6px}
+
+  .status{text-align:right;color:var(--dim);font-size:.74rem;margin-top:8px}
+  .banner{display:none;background:var(--amber);color:#201600;border-radius:12px;padding:8px 12px;font-weight:800;font-size:.85rem;text-align:center;margin:14px 0 0}
+  .foot{color:var(--dim);font-size:.76rem;text-align:center;margin-top:26px;line-height:1.8}
+  @media (max-width:480px){
+    th,td{padding:9px 5px;font-size:.86rem}
+    #rankBox th,#rankBox td{padding:9px 3px}
+    #rankBox thead th{font-size:.62rem;letter-spacing:0}
+    #rankBox .rank{width:2em}
+    .tag{padding:5px 8px;font-size:.76rem}
+    .info{grid-template-columns:1fr;gap:2px 0}
+    .info dd{margin-bottom:8px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">🔫 痛くないサバゲー、今年はお台場！</span>
+    <h1>#ウィンターレーザータグ会2026<small>4チーム総当たり</small></h1>
+    <div class="count" id="count"></div>
+    <div class="banner" id="banner"></div>
+  </header>
+
+  <nav class="maintabs" id="maintabs" aria-label="ページの切り替え">
+    <button type="button" data-go="info">📍 あんない</button>
+    <button type="button" data-go="time">⏱ 進行</button>
+    <button type="button" data-go="taisen">⚔️ 対戦表</button>
+    <button type="button" data-go="team">👥 チーム</button>
+  </nav>
+
+  <section class="card" data-tab="info">
+    <h2>📍 いつ・どこで</h2>
+    <dl class="info">
+      <dt>日時</dt><dd><span class="big">2026年12月13日(日) 15:00〜19:00</span><br>15:00に入場、19:00には完全退出です</dd>
+      <dt>場所</dt><dd><span class="big">ブレイブポイント台場店</span>（貸切）<br><a href="https://www.google.com/maps/search/?api=1&query=%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E5%8F%B0%E5%A0%B4%E5%BA%97" target="_blank" rel="noopener">地図をひらく</a></dd>
+      <dt>参加費</dt><dd>8,900円</dd>
+      <dt>打ち上げっ</dt><dd>19:30〜 笑笑 お台場海浜公園駅前店（台場フロンティアビル2F）<br>料理8品＋3時間飲み放題 4,000円＋チャージ471円</dd>
+    </dl>
+  </section>
+
+  <section class="card" data-tab="info">
+    <h2>🎒 持ちもの</h2>
+    <ul class="items">
+      <li><b>🧢 帽子（必須）</b><span>頭にセンサーを巻くので、その下にかぶります。野球帽など</span></li>
+      <li><b>👟 動きやすい服と靴</b><span>更衣室はせまいので、着替えなくていい格好がおすすめ</span></li>
+      <li><b>🧻 タオル・汗ふきシート</b><span>冬でもけっこう汗をかきます</span></li>
+      <li><b>🥤 飲みもの</b><span>会場に自動販売機もあります</span></li>
+    </ul>
+  </section>
+
+  <section class="card" data-tab="taisen">
+    <h2>🏆 総合順位</h2>
+    <div class="tblwrap" id="rankBox"></div>
+    <p class="note" id="rankNote"></p>
+  </section>
+
+  <section class="card" data-tab="taisen">
+    <h2>⚔️ ルールごとの対戦表</h2>
+    <div class="tabs" id="tabs"></div>
+    <div class="ruledesc" id="ruleDesc"></div>
+    <div class="tblwrap" id="leagueBox"></div>
+    <h3>試合</h3>
+    <div class="tblwrap" id="matchBox"></div>
+    <p class="note">※ルールは調整中です。当日までに変わることがあります。</p>
+  </section>
+
+  <section class="card" data-tab="time">
+    <h2>⏱ タイムテーブル</h2>
+    <div class="tblwrap"><table class="tt"><tbody id="ttBox"></tbody></table></div>
+    <p class="note">進み具合で前後します。休憩は対戦のないチームが各自でどうぞ。</p>
+  </section>
+
+  <section class="card" data-tab="team">
+    <h2>👥 チーム</h2>
+    <div class="tblwrap" id="teamBox"></div>
+  </section>
+
+  <div class="status" id="status"></div>
+  <div class="foot">スコアは幹事が入力すると、30秒ほどでここに出ます。<br>#ウィンターレーザータグ会2026</div>
+</div>
+
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script>
+var STATE = { rule:null, data:null };
+var CONFIG = LT;
+
+function renderRank(d){
+  var arr=standings(d,d.matches), any=arr.some(function(x){return x.played>0;}), medals=["🥇","🥈","🥉"];
+  var h='<table><thead><tr><th class="rank">#</th><th class="name">チーム</th><th>勝点</th>';
+  d.rules.forEach(function(r){ h+='<th>'+esc(r.name)+'</th>'; });
+  h+='<th>勝-分-負</th></tr></thead><tbody>';
+  arr.forEach(function(x,i){
+    h+='<tr><td class="rank">'+(any&&i<3&&x.played?'<span class="medal">'+medals[i]+'</span>':(i+1))+'</td><td class="name">'+pill(d,x.sym,true)+'</td><td class="pts">'+x.pts+'</td>';
+    d.rules.forEach(function(r){
+      var s=standings(d,d.matches.filter(function(m){return m.rule===r.name;})).filter(function(y){return y.sym===x.sym;})[0];
+      h+='<td>'+(s&&s.played?s.pts:'<span style="color:var(--line)">-</span>')+'</td>';
+    });
+    h+='<td>'+x.w+'-'+x.d+'-'+x.l+'</td></tr>';
+  });
+  document.getElementById("rankBox").innerHTML=h+'</tbody></table>';
+  var done=d.matches.filter(played).length;
+  document.getElementById("rankNote").textContent="勝ち"+d.win+"点・引き分け"+d.draw+"点・負け"+d.loss+"点を、全ルール合計。同点なら勝ち数が多いほうが上。　全"+d.matches.length+"試合中 "+done+"試合 終了";
+}
+function renderRule(d){
+  if(!STATE.rule||!d.rules.some(function(r){return r.name===STATE.rule;})){
+    var next=d.matches.filter(function(m){return !played(m);})[0];
+    STATE.rule=next?next.rule:(d.rules[0]?d.rules[0].name:"");
+  }
+  var tabs=document.getElementById("tabs"); tabs.innerHTML="";
+  d.rules.forEach(function(r){
+    var b=document.createElement("button"); b.type="button"; b.textContent=r.name; b.setAttribute("aria-pressed",String(r.name===STATE.rule));
+    b.onclick=function(){ STATE.rule=r.name; renderRule(d); }; tabs.appendChild(b);
+  });
+  var rule=ruleOf(d,STATE.rule);
+  var desc=document.getElementById("ruleDesc"); desc.style.display=rule.desc?"":"none";
+  desc.textContent=rule.desc+(rule.unit?"（スコア＝"+rule.unit+(rule.low?"・少ないほうが勝ち":"")+"）":"");
+  var ms=d.matches.filter(function(m){return m.rule===STATE.rule;}), arr=standings(d,ms), rank={};
+  arr.forEach(function(x,i){ rank[x.sym]=i+1; });
+  var any=ms.some(played);
+  var h='<table class="league"><thead><tr><th class="name">＼</th>';
+  d.teams.forEach(function(t){ h+='<th>'+pill(d,t.sym)+'</th>'; });
+  h+='<th>勝点</th><th>順位</th></tr></thead><tbody>';
+  d.teams.forEach(function(rt){
+    h+='<tr><th class="name">'+pill(d,rt.sym,true)+'</th>';
+    d.teams.forEach(function(ct){
+      if(rt.sym===ct.sym){ h+='<td class="diag">—</td>'; return; }
+      var m=ms.filter(function(x){return (x.home===rt.sym&&x.away===ct.sym)||(x.home===ct.sym&&x.away===rt.sym);})[0];
+      if(!m||!played(m)){ h+='<td class="lpend">-</td>'; return; }
+      var mine=m.home===rt.sym, rs=mine?m.hs:m.as, cs=mine?m.as:m.hs;
+      var won=m.res===(mine?"h":"a"), draw=m.res==="d";
+      h+='<td class="'+(draw?'ld':(won?'lw':'ll'))+'"><span class="mark">'+(draw?'△':(won?'○':'×'))+'</span>'+(rs!=null?'<span class="sc">'+rs+'-'+cs+'</span>':'')+'</td>';
+    });
+    var s=arr.filter(function(y){return y.sym===rt.sym;})[0];
+    h+='<td class="pts">'+(s?s.pts:0)+'</td><td class="rank">'+(any?rank[rt.sym]:'-')+'</td></tr>';
+  });
+  document.getElementById("leagueBox").innerHTML=h+'</tbody></table>';
+  var nextM=d.matches.filter(function(m){return !played(m);})[0];
+  var mh='<table><tbody>';
+  ms.forEach(function(x,i){
+    var p=played(x), hw=x.res==="h", aw=x.res==="a", noSc=x.hs==null;
+    var sc=p?'<span class="score pop '+(hw?'win':'')+'">'+(noSc?(hw?'○':(aw?'×':'△')):x.hs)+'</span><span class="vs">-</span><span class="score pop '+(aw?'win':'')+'">'+(noSc?(aw?'○':(hw?'×':'△')):x.as)+'</span>'
+            :'<span class="pending">'+(x===nextM&&d.matches.some(played)?'つぎ':'まだ')+'</span>';
+    mh+='<tr><td class="rank">'+(i+1)+'</td><td class="name">'+pill(d,x.home,true)+'<span class="vs">vs</span>'+pill(d,x.away,true)+'</td><td>'+sc+'</td></tr>';
+  });
+  document.getElementById("matchBox").innerHTML=mh+'</tbody></table>';
+}
+function renderPlan(d){
+  var now=new Date(), day=CONFIG.startAt.slice(0,10), cur=-1;
+  if(now>=new Date(CONFIG.startAt)&&now<new Date(CONFIG.endAt)){
+    d.plan.forEach(function(p,i){ var m=/^(\d{1,2}):(\d{2})$/.exec(p.time); if(m&&now>=new Date(day+"T"+("0"+m[1]).slice(-2)+":"+m[2]+":00+09:00")) cur=i; });
+  }
+  document.getElementById("ttBox").innerHTML=d.plan.map(function(p,i){
+    var sec=d.rules.some(function(r){return p.what.indexOf(r.name)===0&&p.what.indexOf("説明")<0;});
+    return '<tr class="'+(sec?'sec ':'')+(i===cur?'now':'')+'"><td class="t">'+esc(p.time)+'</td><td>'+esc(p.what)+(p.memo?'<div class="memo">'+esc(p.memo)+'</div>':'')+'</td></tr>';
+  }).join("");
+}
+function renderTeams(d){
+  document.getElementById("teamBox").innerHTML='<table><tbody>'+d.teams.map(function(t){
+    return '<tr><td class="name" style="width:1%">'+pill(d,t.sym,true)+'</td><td class="name members">'+esc(t.members||"チーム分けは後日おしらせ")+'</td></tr>';
+  }).join("")+'</tbody></table>';
+}
+function renderCount(){
+  var el=document.getElementById("count"), now=Date.now(), s=new Date(CONFIG.startAt).getTime(), e=new Date(CONFIG.endAt).getTime();
+  if(now<s){ var days=Math.ceil((s-now)/86400000); el.innerHTML=days>1?'あと <b>'+days+'</b> 日':'<b>いよいよ明日〜今日！</b>'; }
+  else if(now<e) el.innerHTML='<b>開催中！</b>';
+  else el.textContent='おつかれさまでした！';
+}
+function renderAll(d){ STATE.data=d; renderRank(d); renderRule(d); renderPlan(d); renderTeams(d); renderCount(); }
+
+/* 上のタブ。開催前は「あんない」、当日からは「対戦表」が最初に開く。#time などで直接開ける */
+var TABS=["info","time","taisen","team"];
+function showTab(t,keep){
+  if(TABS.indexOf(t)<0) t=Date.now()>=new Date(CONFIG.startAt).getTime()?"taisen":"info";
+  document.querySelectorAll("section[data-tab]").forEach(function(s){ s.hidden=s.dataset.tab!==t; });
+  document.querySelectorAll("#maintabs button").forEach(function(b){ if(b.dataset.go===t) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
+  if(keep){ try{ history.replaceState(null,"","#"+t); }catch(e){} }
+}
+document.getElementById("maintabs").addEventListener("click",function(e){ var b=e.target.closest("button"); if(b){ showTab(b.dataset.go,true); } });
+window.addEventListener("hashchange",function(){ showTab(location.hash.slice(1)); });
+showTab(location.hash.slice(1));
+
+async function load(){
+  var r=await loadData(), banner=document.getElementById("banner");
+  renderAll(r.data);
+  var msg=LT.demo?"これは見本のスコアです":(r.stale?"📡 いま最新を読み込めていません。自動で読み直しています。":"");
+  banner.style.display=msg?"block":"none"; banner.textContent=msg;
+  if(LT.sheetId&&!r.stale) document.getElementById("status").textContent="最終更新 "+new Date().toLocaleTimeString("ja-JP");
+}
+load();
+setInterval(load, LT.refreshMs);
+document.addEventListener("visibilitychange",function(){ if(!document.hidden) load(); });
+window.addEventListener("storage",load);
+setInterval(function(){ if(STATE.data){ renderPlan(STATE.data); renderCount(); } }, 20000);
+</script>
+</body>
+</html>
