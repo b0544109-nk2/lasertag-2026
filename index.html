@@ -38,9 +38,22 @@
   .count{color:var(--dim);font-weight:800;font-size:.9rem}
   .count b{color:var(--amber);font-size:1.3em}
 
-  .card{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:18px 16px 14px;margin:22px 0;
+  .card{position:relative;background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:18px 16px 14px;margin:22px 0;
     box-shadow:0 8px 0 rgba(0,0,0,.35)}
-  .card>h2{margin:0 0 14px;font-size:1.02rem;display:flex;align-items:center;gap:8px}
+  /* 素材は単色。mask で形だけ借りて、色とネオンの光はこちらで付ける */
+  .pic{display:inline-block;filter:drop-shadow(0 0 7px var(--c)) drop-shadow(0 0 1px var(--c));flex:none}
+  .pic i{display:block;width:100%;height:100%;background:var(--c);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+  .pic.flip i{transform:scaleX(-1)}
+  .pic.deco{position:absolute;right:12px;top:-30px;width:60px;height:60px}
+  .pic.it{width:38px;height:38px}
+  .pic.inl{width:30px;height:30px;float:right;margin:0 0 4px 8px}
+  .pic.ft{width:84px;height:84px;margin-top:14px}
+  .hero{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin:10px auto 8px;max-width:420px}
+  .hero .pic.h{width:86px;height:86px}
+  .hero .beam{flex:1;height:3px;margin-bottom:58px;border-radius:3px;background:linear-gradient(90deg,var(--cyan),#fff 50%,var(--cyan));
+    box-shadow:0 0 10px var(--cyan),0 0 22px var(--cyan);animation:zap 2.4s ease-in-out infinite}
+  @keyframes zap{0%,100%{opacity:.25;transform:scaleX(.2);transform-origin:left}45%,60%{opacity:1;transform:scaleX(1);transform-origin:left}}
+  .card>h2{margin:0 76px 14px 0;font-size:1.02rem;display:flex;align-items:center;gap:8px}
   .card>h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
   .note{color:var(--dim);font-size:.8rem;line-height:1.7;margin:8px 2px 0}
 
@@ -50,7 +63,7 @@
   .info a,.note a{color:var(--amber)}
   .big{font-size:1.15rem}
   .items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
-  .items li{background:var(--panel2);border-radius:12px;padding:10px 12px;font-size:.9rem;line-height:1.5}
+  .items li{display:flex;align-items:center;gap:12px;background:var(--panel2);border-radius:12px;padding:10px 12px;font-size:.9rem;line-height:1.5}
   .items b{display:block}
   .items span{color:var(--dim);font-size:.8rem}
 
@@ -120,6 +133,7 @@
   <header>
     <span class="kicker">🔫 痛くないサバゲー、今年はお台場！</span>
     <h1>#ウィンターレーザータグ会2026<small>4チーム総当たり</small></h1>
+    <div class="hero" aria-hidden="true"><span class="pic h" style="--c:var(--cyan)" aria-hidden="true"><i style="--m:url(img/p-aim.png)"></i></span><span class="beam"></span><span class="pic h flip" style="--c:var(--pink)" aria-hidden="true"><i style="--m:url(img/p-cover.png)"></i></span></div>
     <div class="count" id="count"></div>
     <div class="banner" id="banner"></div>
   </header>
@@ -132,32 +146,35 @@
   </nav>
 
   <section class="card" data-tab="info">
+    <span class="pic deco" style="--c:var(--pink)" aria-hidden="true"><i style="--m:url(img/i-pin.svg)"></i></span>
     <h2>📍 いつ・どこで</h2>
     <dl class="info">
       <dt>日時</dt><dd><span class="big">2026年12月13日(日) 15:00〜19:00</span><br>15:00に入場、19:00には完全退出です</dd>
       <dt>場所</dt><dd><span class="big">ブレイブポイント台場店</span>（貸切）<br><a href="https://www.google.com/maps/search/?api=1&query=%E3%83%96%E3%83%AC%E3%82%A4%E3%83%96%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E5%8F%B0%E5%A0%B4%E5%BA%97" target="_blank" rel="noopener">地図をひらく</a></dd>
       <dt>参加費</dt><dd>8,900円</dd>
-      <dt>打ち上げっ</dt><dd>19:30〜 笑笑 お台場海浜公園駅前店（台場フロンティアビル2F）<br>料理8品＋3時間飲み放題 4,000円＋チャージ471円</dd>
+      <dt>打ち上げっ</dt><dd><span class="pic inl" style="--c:var(--amber)" aria-hidden="true"><i style="--m:url(img/i-kanpai.svg)"></i></span>19:30〜 笑笑 お台場海浜公園駅前店（台場フロンティアビル2F）<br>料理8品＋3時間飲み放題 4,000円＋チャージ471円</dd>
     </dl>
   </section>
 
   <section class="card" data-tab="info">
     <h2>🎒 持ちもの</h2>
     <ul class="items">
-      <li><b>🧢 帽子（必須）</b><span>頭にセンサーを巻くので、その下にかぶります。野球帽など</span></li>
-      <li><b>👟 動きやすい服と靴</b><span>更衣室はせまいので、着替えなくていい格好がおすすめ</span></li>
-      <li><b>🧻 タオル・汗ふきシート</b><span>冬でもけっこう汗をかきます</span></li>
-      <li><b>🥤 飲みもの</b><span>会場に自動販売機もあります</span></li>
+      <li><span class="pic it" style="--c:var(--cyan)" aria-hidden="true"><i style="--m:url(img/i-cap.svg)"></i></span><div><b>帽子（必須）</b><span>頭にセンサーを巻くので、その下にかぶります。野球帽など</span></div></li>
+      <li><span class="pic it" style="--c:var(--lime)" aria-hidden="true"><i style="--m:url(img/i-shoe.svg)"></i></span><div><b>動きやすい服と靴</b><span>更衣室はせまいので、着替えなくていい格好がおすすめ</span></div></li>
+      <li><span class="pic it" style="--c:var(--pink)" aria-hidden="true"><i style="--m:url(img/i-towel.svg)"></i></span><div><b>タオル・汗ふきシート</b><span>冬でもけっこう汗をかきます</span></div></li>
+      <li><span class="pic it" style="--c:var(--amber)" aria-hidden="true"><i style="--m:url(img/i-drink.svg)"></i></span><div><b>飲みもの</b><span>会場に自動販売機もあります</span></div></li>
     </ul>
   </section>
 
   <section class="card" data-tab="taisen">
+    <span class="pic deco" style="--c:var(--amber)" aria-hidden="true"><i style="--m:url(img/p-trophy.png)"></i></span>
     <h2>🏆 総合順位</h2>
     <div class="tblwrap" id="rankBox"></div>
     <p class="note" id="rankNote"></p>
   </section>
 
   <section class="card" data-tab="taisen">
+    <span class="pic deco" style="--c:var(--pink)" aria-hidden="true"><i style="--m:url(img/i-target.svg)"></i></span>
     <h2>⚔️ ルールごとの対戦表</h2>
     <div class="tabs" id="tabs"></div>
     <div class="ruledesc" id="ruleDesc"></div>
@@ -168,18 +185,20 @@
   </section>
 
   <section class="card" data-tab="time">
+    <span class="pic deco" style="--c:var(--lime)" aria-hidden="true"><i style="--m:url(img/p-run.png)"></i></span>
     <h2>⏱ タイムテーブル</h2>
     <div class="tblwrap"><table class="tt"><tbody id="ttBox"></tbody></table></div>
     <p class="note">進み具合で前後します。休憩は対戦のないチームが各自でどうぞ。</p>
   </section>
 
   <section class="card" data-tab="team">
+    <span class="pic deco" style="--c:var(--cyan)" aria-hidden="true"><i style="--m:url(img/p-guts.png)"></i></span>
     <h2>👥 チーム</h2>
     <div class="tblwrap" id="teamBox"></div>
   </section>
 
   <div class="status" id="status"></div>
-  <div class="foot">スコアは幹事が入力すると、30秒ほどでここに出ます。<br>#ウィンターレーザータグ会2026</div>
+  <div class="foot">スコアは幹事が入力すると、30秒ほどでここに出ます。<br>#ウィンターレーザータグ会2026<br><span class="pic ft" style="--c:var(--amber)" aria-hidden="true"><i style="--m:url(img/p-champagne.png)"></i></span><br><small>イラスト：ICOOON MONO ／ ヒューマンピクトグラム2.0</small></div>
 </div>
 
 <script src="config.js"></script>
